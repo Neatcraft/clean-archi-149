@@ -1,6 +1,6 @@
 namespace WebApplication1;
 
-public class BookRegistration
+public class IBookRepository
 {
     
 }
