@@ -1,6 +1,8 @@
 namespace WebApplication1;
 
-public class IBookRepository
+public interface IBookRepository
 {
-    
+    public void Create(Book book);
+    bool IsAlreadyExist(string isbn);
 }
+
