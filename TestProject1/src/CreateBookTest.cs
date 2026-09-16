@@ -1,14 +1,18 @@
+using Microsoft.AspNetCore.Mvc;
 using WebApplication1;
-using WebApplication1.Adpater.Primary;
-using WebApplication1.Adpater.Primary.Resource;
+using WebApplication1.Adpater.Secondary;
+using WebApplication1.Adpater.Secondary.Provider;
+using WebApplication1.Presentation.Primary;
+using WebApplication1.Presentation.Primary.Resource;
 
 namespace TestProject1;
 
 public class CreateBookTest
 {
-    private BookController init(BookRepositoryStub repository)
+    private BookController init(IBookDao dao)
     {
-        var service = new BookService(repository);
+        var repository = new BookRepository(dao);
+        var service = new CreateBookUseCase(repository);
         return new (service);
     }
     
@@ -59,7 +63,13 @@ public class CreateBookTest
             isAlreadyExist = true
         };
         var sut = init(repository);
+        var result = sut.Create(bookResource) as ConflictObjectResult;
         
-        Assert.Throws<AlreadyExistException>(() => sut.Create(bookResource));
+        Assert.NotNull(result);
+        
+        var error = result.Value as ISBNAlreadyExistError;
+        
+        Assert.NotNull(error);
+        Assert.Equal("ISBN already exist", error.Message);
     }
 }

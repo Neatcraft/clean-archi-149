@@ -1,4 +1,4 @@
-namespace WebApplication1.Adpater.Primary.Resource;
+namespace WebApplication1.Presentation.Primary.Resource;
 
 public record BookResource(string title, string isbn)
 {
