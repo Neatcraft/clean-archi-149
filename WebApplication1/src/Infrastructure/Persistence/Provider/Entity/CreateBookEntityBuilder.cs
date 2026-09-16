@@ -5,7 +5,7 @@ public class CreateBookEntityBuilder(string isbn = "", string title = "")
 {
     public BookEntity Build(Book book)
     {
-        return new BookEntity { ISBN = isbn, Title = title };
+        return new () { ISBN = isbn, Title = title };
     }
 
     public IBookTransformer<BookEntity> WithISBN(string isbn)

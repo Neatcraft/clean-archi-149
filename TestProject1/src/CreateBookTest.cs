@@ -12,8 +12,8 @@ public class CreateBookTest
     private BookController init(IBookDao dao)
     {
         var repository = new BookRepository(dao);
-        var service = new CreateBookUseCase(repository);
-        return new (service);
+        var service = new CreateBookCommandHandler(repository);
+        return new (service, null);
     }
     
     [Fact]

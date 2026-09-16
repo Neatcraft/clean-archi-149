@@ -1,13 +1,11 @@
 using WebApplication1.Domain.Application.Presenter;
-using WebApplication1.Domain.Application.UseCase;
-using WebApplication1.Domain.Port.Primary;
 using WebApplication1.Domain.Port.Primary.Command;
 
 namespace WebApplication1;
 
-public class CreateBookUseCase(IBookRepository bookRepository) : ICreateBookUseCase
+public class CreateBookCommandHandler(IBookRepository bookRepository) : ICommandHandler<CreateBookCommand, ICreateBookPresenter>
 {
-    public void Execute(CreateBookCommand command, ICreateBookPresenter presenter)
+    public void Handle(CreateBookCommand command, ICreateBookPresenter presenter)
     {
         Book book = new Book();
 
